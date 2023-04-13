@@ -8,10 +8,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.foodconnect.demo.model.Customer;
 import com.foodconnect.demo.repo.CustomerRepo;
@@ -19,6 +21,7 @@ import com.foodconnect.demo.requestdto.CustomerRequestDTO;
 import com.foodconnect.demo.responsedto.CustomerResponseDTO;
 import com.foodconnect.demo.service.CustomerService;
 @SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
 class CustomerServiceIMPLTest {
 	
 	@Autowired
@@ -36,8 +39,8 @@ class CustomerServiceIMPLTest {
 		Customer map = mapper.map(customerRequestDTO,Customer.class);
 		CustomerResponseDTO customerResponseDTO= mapper.map(map,CustomerResponseDTO.class);
 		when(customerService.saveCustomer(customerRequestDTO)).thenReturn(customerResponseDTO);
-		assertEquals(customerRequestDTO.getGender(),customerResponseDTO.getGender());
 		assertEquals(customerRequestDTO.getName(),customerResponseDTO.getName());
+		assertEquals(customerRequestDTO.getGender(),customerResponseDTO.getGender());
 		assertEquals(customerRequestDTO.getMobNumber(),customerResponseDTO.getMobNumber());
 	}
 
