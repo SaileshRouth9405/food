@@ -36,7 +36,7 @@ class CustomerServiceIMPLTest {
 		Customer map = mapper.map(customerRequestDTO,Customer.class);
 		CustomerResponseDTO customerResponseDTO= mapper.map(map,CustomerResponseDTO.class);
 		when(customerService.saveCustomer(customerRequestDTO)).thenReturn(customerResponseDTO);
-		assertEquals(customerRequestDTO.getName(),"test");
+		assertEquals(customerRequestDTO.getName(),customerResponseDTO.getName());
 		assertEquals(customerRequestDTO.getGender(),customerResponseDTO.getGender());
 		assertEquals(customerRequestDTO.getMobNumber(),customerResponseDTO.getMobNumber());
 	}
