@@ -32,17 +32,17 @@ class CustomerServiceIMPLTest {
 	@Autowired
 	private ModelMapper mapper;
 	
-//	@Test
-//	void testSaveCustomer() {
-//		System.out.println(mapper);
-//		CustomerRequestDTO customerRequestDTO=new CustomerRequestDTO("name","gender","8985457845");
-//		Customer map = mapper.map(customerRequestDTO,Customer.class);
-//		CustomerResponseDTO customerResponseDTO= mapper.map(map,CustomerResponseDTO.class);
-//		when(customerService.saveCustomer(customerRequestDTO)).thenReturn(customerResponseDTO);
-//		assertEquals(customerRequestDTO.getName(),customerResponseDTO.getName());
-//		assertEquals(customerRequestDTO.getGender(),customerResponseDTO.getGender());
-//		assertEquals(customerRequestDTO.getMobNumber(),customerResponseDTO.getMobNumber());
-//	}
+	@Test
+	void testSaveCustomer() {
+		System.out.println(mapper);
+		CustomerRequestDTO customerRequestDTO=new CustomerRequestDTO("name","gender","8985457845");
+		Customer map = mapper.map(customerRequestDTO,Customer.class);
+		CustomerResponseDTO customerResponseDTO= mapper.map(map,CustomerResponseDTO.class);
+		when(customerService.saveCustomer(customerRequestDTO)).thenReturn(customerResponseDTO);
+		assertEquals(customerRequestDTO.getName(),customerResponseDTO.getName());
+		assertEquals(customerRequestDTO.getGender(),customerResponseDTO.getGender());
+		assertEquals(customerRequestDTO.getMobNumber(),customerResponseDTO.getMobNumber());
+	}
 
 //	@Test
 //	void testGetByCustomerId() throws Exception
@@ -58,41 +58,40 @@ class CustomerServiceIMPLTest {
 //		assertEquals(customer.getMobNumber(), responseDTO.getMobNumber());
 //		
 //	}
+	@Test
+	void testUpdateByCustomerId() {
+	
+		Integer id = 2;
+		CustomerRequestDTO customerRequestDTO=new CustomerRequestDTO("name1","gender1","8985457847");
+		Optional<Customer> customer=Optional.of(new Customer(2,"Sailesh1","gender1","8770708064"));
+		when(customerRepo.findById(id)).thenReturn(customer);
+		assertEquals(customer.get().getId(),id);
+		Customer customer2=mapper.map(customerRequestDTO, Customer.class);
+		customer2.setId(id);
+		CustomerResponseDTO responseDTO=mapper.map(customer2,CustomerResponseDTO.class);
+		when(customerService.updateByCustomerId(id,customerRequestDTO)).thenReturn(responseDTO);
+		System.out.println();
+		assertEquals(customerRequestDTO.getName(), responseDTO.getName());
+		assertEquals(customerRequestDTO.getGender(), responseDTO.getGender());
+		assertEquals(customerRequestDTO.getMobNumber(), responseDTO.getMobNumber());
 
-//	@Test
-//	void testUpdateByCustomerId() {
-//	
-//		Integer id = 2;
-//		CustomerRequestDTO customerRequestDTO=new CustomerRequestDTO("name1","gender1","8985457847");
-//		Optional<Customer> customer=Optional.of(new Customer(2,"Sailesh1","gender1","8770708064"));
-//		when(customerRepo.findById(id)).thenReturn(customer);
-//		assertEquals(customer.get().getId(),id);
-//		Customer customer2=mapper.map(customerRequestDTO, Customer.class);
-//		customer2.setId(id);
-//		CustomerResponseDTO responseDTO=mapper.map(customer2,CustomerResponseDTO.class);
-//		when(customerService.updateByCustomerId(id,customerRequestDTO)).thenReturn(responseDTO);
-//		System.out.println();
-//		assertEquals(customerRequestDTO.getName(), responseDTO.getName());
-//		assertEquals(customerRequestDTO.getGender(), responseDTO.getGender());
-//		assertEquals(customerRequestDTO.getMobNumber(), responseDTO.getMobNumber());
-//
-//	}
+	}
 //
 //	@Test
 //	void testDeleteByCustomerId() {
 //		fail("Not yet implemented");
 //	}
 
-//	@Test
-//	void testGetAllCustomer() {
-//		List<Customer> customerResponseDTOs=new ArrayList<>();
-//		customerResponseDTOs.add(new Customer(1,"sailesh","male","8982158317"));
-//		customerResponseDTOs.add(new Customer(2,"sailesh11","male","8982158311"));
-//		
-////		List<CustomerResponseDTO> map = customerResponseDTOs.stream().map(e->mapper.map(e,CustomerResponseDTO.class)).collect(Collectors.toList());
-//		
-//		when(customerRepo.findAll()).thenReturn(customerResponseDTOs);
-//		assertEquals(2,customerResponseDTOs.size());
-//	}
+	@Test
+	void testGetAllCustomer() {
+		List<Customer> customerResponseDTOs=new ArrayList<>();
+		customerResponseDTOs.add(new Customer(1,"sailesh","male","8982158317"));
+		customerResponseDTOs.add(new Customer(2,"sailesh11","male","8982158311"));
+		
+//		List<CustomerResponseDTO> map = customerResponseDTOs.stream().map(e->mapper.map(e,CustomerResponseDTO.class)).collect(Collectors.toList());
+		
+		when(customerRepo.findAll()).thenReturn(customerResponseDTOs);
+		assertEquals(2,customerResponseDTOs.size());
+	}
 
 }
