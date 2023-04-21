@@ -45,20 +45,20 @@ class CustomerServiceIMPLTest {
 	}
 //fails test case  testgetbycustomerid
 	
-//	@Test
-//	void testGetByCustomerId() throws Exception
-//	{
-//		Integer id=1;
-//		Customer customer=new Customer(1,"Sailesh","gender","8770708063");
-//		when(customerRepo.findById(id)).thenReturn(Optional.of(customer));
-//		assertEquals(customer.getId(),id);
-//		CustomerResponseDTO responseDTO=mapper.map(customer,CustomerResponseDTO.class);
-//		when(customerService.getByCustomerId(id)).thenReturn(responseDTO);
-//		assertEquals(customer.getName(), responseDTO.getName());
-//		assertEquals(customer.getGender(), responseDTO.getGender());
-//		assertEquals(customer.getMobNumber(), responseDTO.getMobNumber());
-//		
-//	}
+	@Test
+	void testGetByCustomerId() throws Exception
+	{
+		Integer id=1;
+		Customer customer=new Customer(1,"Sailesh","gender","8770708063");
+		when(customerRepo.findById(id)).thenReturn(Optional.of(customer));
+		assertEquals(customer.getId(),id);
+		CustomerResponseDTO responseDTO=mapper.map(customer,CustomerResponseDTO.class);
+		when(customerService.getByCustomerId(id)).thenReturn(responseDTO);
+		assertEquals(customer.getName(), responseDTO.getName());
+		assertEquals(customer.getGender(), responseDTO.getGender());
+		assertEquals(customer.getMobNumber(), responseDTO.getMobNumber());
+		
+	}
 	
 	@Test
 	void testUpdateByCustomerId() {
